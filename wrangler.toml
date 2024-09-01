@@ -1,5 +1,6 @@
 name = "dottxt"
 compatibility_date = "2024-09-01"
+pages_build_output_dir = "./dist"
 # compatibility_flags = [ "nodejs_compat" ]
 
 # [vars]
