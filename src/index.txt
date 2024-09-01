@@ -1,0 +1,2 @@
+dottxt returns important page information from various sites as a plain text.
+This can be useful in extremely low bandwidth enviornments.
