@@ -1,10 +1,12 @@
 import { Hono } from "hono";
-const app = new Hono();
-
 import index from "./index.txt?raw";
 
-app.get("/", (c) => {
-  return c.text(index);
-});
+import { usps } from "./sites/usps";
+
+const app = new Hono()
+  .get("/", (c) => {
+    return c.text(index);
+  })
+  .route("/", usps);
 
 export default app;

@@ -1,2 +1,11 @@
 dottxt returns important page information from various sites as a plain text.
 This can be useful in extremely low bandwidth enviornments.
+
+
+Current URLs:
+
+/usps/tracking/<code>
+Retrieve USPS tracking information with up to 5 events.
+
+/usps/tracking/<code>/full
+Retrieve USPS tracking information with full history.
