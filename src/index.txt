@@ -1,5 +1,5 @@
 dottxt returns important page information from various sites as a plain text.
-This can be useful in extremely low bandwidth enviornments.
+This can be useful in extreme low bandwidth environments.
 
 
 Current URLs:
