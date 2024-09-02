@@ -68,3 +68,27 @@ export const formatTracker = (tracker: Tracker, full: boolean = false) => {
     .filter((line) => line !== undefined)
     .join("\n");
 };
+
+export const getEasypostTracker = async (
+  EASYPOST_API_KEY: string,
+  code: string,
+  carrier: string
+) => {
+  const trackerResponse = await fetch("https://api.easypost.com/v2/trackers", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Basic " + btoa(EASYPOST_API_KEY + ":"),
+    },
+    body: JSON.stringify({
+      tracking_code: code,
+      carrier,
+    }),
+  });
+
+  if (trackerResponse.status === 200) {
+    return (await trackerResponse.json()) as Tracker;
+  } else {
+    return undefined;
+  }
+};
