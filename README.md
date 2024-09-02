@@ -1,6 +1,6 @@
 # dottxt
 
-Information for extremely low bandwidth environments.
+Information in extremely low bandwidth environments.
 
 ![a person with a large backpack, heavy blue jacket, beige snow pants, and snow boots standing right in front of mountains covered in snow. between the mountains is the text dottxt in a decorative font, with the text being partiallly obscured by the mountains.](./.github/assets/cover.jpg)
 
