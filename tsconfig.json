@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "noEmit": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "lib": ["esnext"],
     "strict": true,
+    "types": ["@cloudflare/workers-types/2023-07-01"],
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "lib": ["ESNext"],
-    "types": ["@cloudflare/workers-types/2023-07-01", "vite/client"]
-  }
+    "target": "es2022",
+    "allowJs": true,
+    "moduleDetection": "force",
+    "isolatedModules": true
+  },
+  "exclude": ["node_modules", "dist", "test"]
 }

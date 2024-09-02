@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import index from "./index.txt?raw";
+import index from "./index.txt";
 
 import { usps } from "./sites/usps";
 
