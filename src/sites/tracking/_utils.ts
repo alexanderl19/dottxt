@@ -1,14 +1,12 @@
-import { Hono } from "hono";
 import type { Tracker } from "@easypost/api";
 import { titleCase } from "title-case";
 import { sentenceCase } from "change-case";
 import { format } from "date-fns";
-import { env, getRuntimeKey } from "hono/adapter";
 
 const formatDate = (date: Parameters<typeof format>["0"]) =>
   format(date, "MMM do yyyy (MM/dd/yyyy) hh:mm:ss b (HH:mm:ss)");
 
-const formatTracker = (tracker: Tracker, full: boolean = false) => {
+export const formatTracker = (tracker: Tracker, full: boolean = false) => {
   const lines: (undefined | string | (string | undefined)[])[] = [];
 
   if (tracker.carrier_detail) {
@@ -70,36 +68,3 @@ const formatTracker = (tracker: Tracker, full: boolean = false) => {
     .filter((line) => line !== undefined)
     .join("\n");
 };
-
-const usps = new Hono().on(
-  "GET",
-  ["/usps/tracking/:code", "/usps/tracking/:code/full"],
-  async (c) => {
-    const { EASYPOST_API_KEY } = env<{ EASYPOST_API_KEY: string }>(c);
-
-    const trackerResponse = await fetch(
-      "https://api.easypost.com/v2/trackers",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Basic " + btoa(EASYPOST_API_KEY + ":"),
-        },
-        body: JSON.stringify({
-          tracking_code: c.req.param("code"),
-          carrier: "USPS",
-        }),
-      }
-    );
-
-    if (trackerResponse.status === 200) {
-      const tracker = (await trackerResponse.json()) as Tracker;
-
-      return c.text(formatTracker(tracker, c.req.path.endsWith("/full")));
-    } else {
-      return c.text("Failed to fetch shipment information.", 500);
-    }
-  }
-);
-
-export { usps };
