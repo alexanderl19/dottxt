@@ -58,6 +58,15 @@ const wiki = new Hono()
         );
       }
 
+      if (searchResults.results[1].length === 0) {
+        return c.text(
+          `Did not find page matching "${c.req.param(
+            "query"
+          )}" or any search results.`,
+          404
+        );
+      }
+
       const queryResult = await query(searchResults.results[1][0]);
       if (!queryResult.success) {
         if (queryResult.error === 429) {
