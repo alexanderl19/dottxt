@@ -2,9 +2,9 @@ import { Hono } from "hono";
 import { env } from "hono/adapter";
 import { formatTracker, getEasypostTracker } from "./utils";
 
-const tracking = new Hono().on(
+const track = new Hono().on(
   "GET",
-  ["/tracking/:carrier/:code", "/tracking/:carrier/:code/full"],
+  ["/track/:carrier/:code", "/track/:carrier/:code/full"],
   async (c) => {
     if (!["usps", "ups"].includes(c.req.param("carrier").toLowerCase())) {
       return c.text("Carrier is not currently supported.", 400);
@@ -26,4 +26,4 @@ const tracking = new Hono().on(
   }
 );
 
-export { tracking };
+export { track };

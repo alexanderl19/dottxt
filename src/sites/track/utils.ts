@@ -86,9 +86,14 @@ export const getEasypostTracker = async (
     }),
   });
 
-  if (trackerResponse.status === 200) {
+  if (trackerResponse.ok) {
     return (await trackerResponse.json()) as Tracker;
   } else {
+    console.error(
+      trackerResponse.status,
+      trackerResponse.statusText,
+      await trackerResponse.text()
+    );
     return undefined;
   }
 };
