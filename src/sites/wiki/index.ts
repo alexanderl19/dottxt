@@ -44,16 +44,16 @@ const wiki = new Hono()
       if (!searchResults.success) {
         if (searchResults.error === 429) {
           return c.text(
-            `Did not find page matching ${c.req.param(
+            `Did not find page matching "${c.req.param(
               "query"
-            )} and failed to search. Likely being rate limited by Wikipedia. Try again later.`,
+            )}" and failed to search. Likely being rate limited by Wikipedia. Try again later.`,
             500
           );
         }
         return c.text(
-          `Did not find page matching ${c.req.param(
+          `Did not find page matching "${c.req.param(
             "query"
-          )} and failed to search.`,
+          )}" and failed to search.`,
           500
         );
       }
@@ -71,25 +71,25 @@ const wiki = new Hono()
       if (!queryResult.success) {
         if (queryResult.error === 429) {
           return c.text(
-            `Did not find page matching ${c.req.param(
+            `Did not find page matching "${c.req.param(
               "query"
-            )} and failed to load first search result. Likely being rate limited by Wikipedia. Try again later.`,
+            )}" and failed to load first search result. Likely being rate limited by Wikipedia. Try again later.`,
             500
           );
         }
         return c.text(
-          `Did not find page matching ${c.req.param(
+          `Did not find page matching "${c.req.param(
             "query"
-          )} and failed to load first search result.`,
+          )}" and failed to load first search result.`,
           500
         );
       }
 
       if (queryResult.result.query.pages["-1"]) {
         return c.text(
-          `Did not find page matching ${c.req.param(
+          `Did not find page matching "${c.req.param(
             "query"
-          )} and failed to load first search result.`,
+          )}" and failed to load first search result.`,
           500
         );
       }
