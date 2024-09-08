@@ -6,6 +6,16 @@ Current URLs:
 
 —————
 
+/wiki/<query>
+View a specific Wikipedia article, or the first search result.
+
+—————
+
+/wiki/search/<query>
+Get a list of Wikipedia articles that match the query.
+
+—————
+
 /track/<carrier>/<code>
 Retrieve parcel tracking information with up to 5 events.
 

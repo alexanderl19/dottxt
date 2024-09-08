@@ -1,13 +1,15 @@
 import type { Tracker } from "@easypost/api";
+import type { Lines } from "../../utils";
 import { titleCase } from "title-case";
 import { sentenceCase } from "change-case";
 import { format } from "date-fns";
+import { joinLines } from "../../utils";
 
 const formatDate = (date: Parameters<typeof format>["0"]) =>
   format(date, "MMM do yyyy (MM/dd/yyyy) hh:mm:ss b (HH:mm:ss)");
 
 export const formatTracker = (tracker: Tracker, full: boolean = false) => {
-  const lines: (undefined | string | (string | undefined)[])[] = [];
+  const lines: Lines = [];
 
   if (tracker.carrier_detail) {
     lines.push([
@@ -63,10 +65,7 @@ export const formatTracker = (tracker: Tracker, full: boolean = false) => {
     lines.push("No prior updates.");
   }
 
-  return lines
-    .flatMap((line) => line)
-    .filter((line) => line !== undefined)
-    .join("\n");
+  return joinLines(lines);
 };
 
 export const getEasypostTracker = async (
